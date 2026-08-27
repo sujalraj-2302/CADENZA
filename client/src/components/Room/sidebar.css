@@ -1,0 +1,117 @@
+.cad-invite-card { width: 100%; min-height: 190px; padding: 24px; display: flex; flex-direction: column; justify-content: flex-end; gap: 7px; color: #fff; background-position: center; background-size: cover; border-radius: var(--cad-radius-md); box-shadow: var(--cad-shadow-soft); }
+.cad-invite-genres { width: 100%; display: flex; flex-wrap: wrap; gap: 6px; }
+.cad-invite-genre { display: inline-flex; align-items: center; gap: 5px; padding: 7px 9px; color: var(--cad-text-dim); background: var(--cad-surface); border: 1px solid var(--cad-border); border-radius: var(--cad-radius-sm); font-size: 10px; }
+.cad-invite-genre.active { color: var(--cad-gold); border-color: var(--cad-gold); background: var(--cad-gold-soft); }
+.cad-invite-card.genre-cinema { background-color: #19130e; }
+.cad-invite-card.genre-aurora { background-color: #132a2a; }
+.cad-invite-card.genre-postcard { background-color: #536477; }
+.cad-invite-card.genre-minimal { color: var(--cad-text); background: linear-gradient(135deg, var(--cad-gold-soft), var(--cad-surface-raised)); border: 1px solid var(--cad-gold); }
+.cad-invite-card.genre-minimal strong { color: var(--cad-text); }
+.cad-invite-card.genre-minimal small { color: var(--cad-text-dim); }
+.cad-invite-card strong { color: #fff; font-family: var(--cad-font-display); font-size: 28px; letter-spacing: 0.14em; }
+.cad-invite-card span { font-family: var(--cad-font-display); font-size: 21px; }
+.cad-invite-card small { display: inline-flex; align-items: center; gap: 5px; color: rgba(255,255,255,0.8); font-size: 11px; }
+.cad-chat-timestamp { display: inline-flex; margin-left: 6px; padding: 2px 5px; color: var(--cad-gold); background: var(--cad-gold-soft); border-radius: 4px; font-size: 10px; }
+.cad-chat-timestamp:hover { text-decoration: underline; }
+.cad-sidebar-panel { display: flex; flex-direction: column; height: 100%; min-height: 0; padding: 12px; gap: 10px; }
+
+.cad-queue-add { display: flex; gap: 7px; }
+.cad-queue-add-btn { padding: 0 11px; min-width: 40px; display: grid; place-items: center; }
+.cad-queue-list { list-style: none; margin: 0; padding: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+.cad-queue-item { display: flex; align-items: center; gap: 8px; padding: 8px; border-radius: var(--cad-radius-sm); background: var(--cad-surface); }
+.cad-queue-item img { width: 48px; height: 32px; object-fit: cover; border-radius: 4px; flex-shrink: 0; }
+.cad-queue-item-info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.cad-queue-item-title { font-size: 12.5px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cad-queue-item-meta { font-size: 11px; color: var(--cad-text-faint); }
+.cad-queue-vote { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--cad-text-dim); padding: 4px 7px; border-radius: 999px; border: 1px solid var(--cad-border); flex-shrink: 0; }
+.cad-queue-vote.active { color: var(--cad-gold); border-color: var(--cad-gold); }
+.cad-queue-remove { color: var(--cad-text-faint); flex-shrink: 0; }
+.cad-queue-remove:hover { color: var(--cad-red); }
+
+.cad-chat { flex: 1; }
+.cad-chat-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 9px; border-bottom: 1px solid var(--cad-border); }
+.cad-chat-head > div { display: flex; flex-direction: column; gap: 2px; }
+.cad-chat-head strong { font-size: 13px; }
+.cad-chat-head span { color: var(--cad-text-faint); font-size: 10px; }
+.cad-chat-poll-btn { display: flex; align-items: center; gap: 5px; padding: 6px 9px; border: 1px solid rgba(212,168,79,0.28); border-radius: var(--cad-radius-sm); color: var(--cad-gold); font-size: 10px; }
+.cad-chat-poll-btn:hover { background: var(--cad-gold-soft); }
+.cad-chat-list { flex: 1; min-height: 0; list-style: none; margin: 0; padding: 2px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+.cad-chat-msg { position: relative; display: flex; flex-direction: column; font-size: 12px; max-width: 90%; }
+.cad-chat-msg.mine { align-self: flex-end; align-items: flex-end; }
+.cad-chat-author { font-size: 10px; color: var(--cad-gold); margin-bottom: 2px; }
+.cad-chat-text { background: var(--cad-surface); padding: 7px 9px; border-radius: var(--cad-radius-sm); line-height: 1.45; word-break: break-word; }
+.cad-chat-msg.mine .cad-chat-text { background: var(--cad-gold-soft); }
+.cad-chat-replied { max-width: 100%; margin-bottom: 3px; padding: 4px 6px; display: flex; align-items: center; gap: 4px; text-align: left; color: var(--cad-text-faint); background: transparent; border-left: 2px solid var(--cad-gold); font-size: 9px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cad-chat-message-actions { display: flex; gap: 2px; opacity: 0; margin-top: 2px; transition: opacity var(--cad-transition); }
+.cad-chat-msg:hover .cad-chat-message-actions, .cad-chat-msg:focus-within .cad-chat-message-actions { opacity: 1; }
+.cad-chat-message-actions button { color: var(--cad-text-faint); padding: 3px; }
+.cad-chat-message-actions button:hover { color: var(--cad-gold); }
+.cad-chat-react-wrap { position: relative; }
+.cad-chat-react-menu { display: none; position: absolute; bottom: 100%; right: 0; padding: 4px; background: var(--cad-surface-raised); border: 1px solid var(--cad-border); border-radius: 8px; box-shadow: var(--cad-shadow-soft); white-space: nowrap; }
+.cad-chat-react-wrap:hover .cad-chat-react-menu, .cad-chat-react-wrap:focus-within .cad-chat-react-menu { display: flex; }
+.cad-chat-react-menu button { font-size: 14px; padding: 4px; }
+.cad-chat-reactions { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
+.cad-chat-reactions span { padding: 2px 5px; border-radius: 999px; background: var(--cad-surface-raised); color: var(--cad-text-dim); font-size: 9px; }
+.cad-chat-system { align-self: center; padding: 4px 8px; border-radius: 999px; background: var(--cad-surface); color: var(--cad-text-faint); font-size: 9px; }
+.cad-chat-typing { font-size: 10px; color: var(--cad-text-faint); margin: 0; height: 13px; }
+.cad-chat-input-row { display: flex; gap: 7px; }
+.cad-chat-input-row .cad-input { min-width: 0; }
+.cad-chat-send { padding: 0 11px; }
+.cad-chat-timestamp-toggle { display: grid; place-items: center; flex-shrink: 0; padding: 0 9px; color: var(--cad-text-faint); border: 1px solid var(--cad-border); border-radius: var(--cad-radius-sm); }
+.cad-chat-timestamp-toggle.active { color: var(--cad-gold); border-color: var(--cad-gold); background: var(--cad-gold-soft); }
+.cad-chat-replying { display: flex; align-items: center; justify-content: space-between; gap: 7px; padding: 7px 8px; background: var(--cad-gold-soft); border-left: 2px solid var(--cad-gold); font-size: 10px; color: var(--cad-text-dim); }
+.cad-chat-replying > div { display: flex; align-items: center; gap: 5px; min-width: 0; }
+.cad-chat-replying span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cad-chat-replying button { color: var(--cad-text-faint); }
+
+.cad-pinned-poll { flex-shrink: 0; padding: 8px; background: rgba(212,168,79,0.04); border: 1px solid rgba(212,168,79,0.2); border-radius: var(--cad-radius-md); }
+.cad-pinned-label { display: flex; align-items: center; justify-content: space-between; color: var(--cad-gold); font-size: 8px; letter-spacing: 0.12em; }
+.cad-poll-composer { flex-shrink: 0; padding: 10px; background: var(--cad-surface-raised); border: 1px solid var(--cad-border); border-radius: var(--cad-radius-md); display: flex; flex-direction: column; gap: 7px; }
+.cad-poll-composer-head { display: flex; align-items: center; justify-content: space-between; font-size: 11px; }
+.cad-poll-composer-head button { color: var(--cad-text-faint); }
+.cad-poll-option-input { display: flex; gap: 5px; align-items: center; }
+.cad-poll-option-input .cad-input { min-width: 0; }
+.cad-poll-option-input > button { color: var(--cad-text-faint); }
+.cad-poll-composer-actions { display: flex; justify-content: space-between; align-items: center; }
+.cad-poll-composer-actions .cad-btn { padding: 7px 10px; font-size: 10px; }
+.cad-poll-add-option { display: flex; align-items: center; gap: 4px; color: var(--cad-text-dim); font-size: 10px; }
+
+.cad-people-panel { padding: 12px; }
+.cad-people-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 10px; border-bottom: 1px solid var(--cad-border); color: var(--cad-gold); }
+.cad-people-head > div { display: flex; flex-direction: column; gap: 3px; }
+.cad-people-head strong { font-size: 13px; color: var(--cad-text); }
+.cad-people-head span { color: var(--cad-text-faint); font-size: 9px; }
+.cad-host-status { margin: 9px 0; padding: 7px 8px; border-radius: var(--cad-radius-sm); background: var(--cad-red-soft); color: var(--cad-text-dim); font-size: 9px; line-height: 1.4; }
+.cad-participant-list { flex: 1; min-height: 0; list-style: none; margin: 0; padding: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
+.cad-participant-item { display: flex; align-items: center; gap: 8px; padding: 7px 6px; border-radius: var(--cad-radius-sm); }
+.cad-participant-item:hover, .cad-participant-item.host { background: var(--cad-surface); }
+.cad-participant-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.cad-participant-name { font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cad-participant-role { display: flex; align-items: center; gap: 4px; font-size: 9px; color: var(--cad-text-faint); }
+.cad-participant-role.role-host { color: var(--cad-gold); }
+.cad-participant-role.role-moderator { color: var(--cad-red); }
+.cad-participant-actions { display: flex; gap: 3px; }
+.cad-participant-action-btn { color: var(--cad-text-faint); padding: 4px; border-radius: 4px; }
+.cad-participant-action-btn:hover { background: var(--cad-surface-raised); color: var(--cad-text); }
+.cad-participant-action-btn.danger:hover { color: var(--cad-red); }
+
+@keyframes cad-spin { to { transform: rotate(360deg); } }
+.cad-spin { animation: cad-spin 0.9s linear infinite; }
+
+
+.cad-queue-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--cad-border, rgba(255,255,255,.12));
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cad-gold, #d8aa4e);
+  cursor: pointer;
+}
+
+.cad-queue-play:hover {
+  background: rgba(216,170,78,.12);
+}

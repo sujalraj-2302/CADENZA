@@ -1,0 +1,83 @@
+.cad-room {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--cad-bg);
+  background-image: var(--cad-atmosphere);
+  display: flex;
+  flex-direction: column;
+}
+
+.cad-room-header {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--cad-border);
+  background: var(--cad-header-bg);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+}
+.cad-room-brand { display: flex; align-items: center; gap: 10px; }
+.cad-room-code { color: var(--cad-text-faint); font-size: 11px; letter-spacing: 0.08em; }
+.cad-room-header-right { display: flex; align-items: center; gap: 12px; }
+.cad-room-count { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--cad-text-dim); }
+.cad-cinema-toggle-header { display: grid; place-items: center; color: var(--cad-text-dim); padding: 7px; border: 1px solid var(--cad-border); border-radius: var(--cad-radius-sm); }
+.cad-cinema-toggle-header:hover { color: var(--cad-gold); border-color: rgba(212,168,79,0.35); }
+.cad-room-invite-btn { padding: 7px 11px; font-size: 11px; display: flex; align-items: center; gap: 5px; }
+.cad-room-leave { display: flex; align-items: center; gap: 6px; padding: 7px 11px; border: 1px solid rgba(201,75,75,0.4); border-radius: var(--cad-radius-sm); color: var(--cad-red); font-size: 11px; transition: background var(--cad-transition), border-color var(--cad-transition); }
+.cad-room-leave:hover { background: var(--cad-red-soft); border-color: var(--cad-red); }
+.cad-room-leave:disabled { opacity: 0.5; cursor: wait; }
+
+.cad-room-banner { text-align: center; font-size: 11px; color: var(--cad-text-dim); background: var(--cad-red-soft); padding: 7px 12px; border-bottom: 1px solid rgba(201,75,75,0.18); }
+
+.cad-room-body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr) 360px;
+  gap: 12px;
+  padding: 12px;
+}
+.cad-room-people, .cad-room-chat { min-height: 0; overflow: hidden; }
+.cad-room-video-col { min-width: 0; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 2px; }
+
+.cad-room-title-row { display: flex; justify-content: space-between; align-items: center; }
+.cad-room-title-row > div:first-child { color: var(--cad-text-faint); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; }
+.cad-room-title-row h1 { margin: 4px 0 0; color: var(--cad-text); font-family: var(--cad-font-display); font-size: 22px; letter-spacing: 0; text-transform: none; font-weight: 600; }
+.cad-room-live-dot { display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; background: var(--cad-red); box-shadow: 0 0 0 4px var(--cad-red-soft); vertical-align: middle; }
+.cad-cinema-toggle-inline { color: var(--cad-text-dim); padding: 7px; border: 1px solid var(--cad-border); border-radius: var(--cad-radius-sm); }
+.cad-cinema-toggle-inline:hover { color: var(--cad-gold); border-color: rgba(212,168,79,0.35); }
+.cad-theme-select { color: var(--cad-text-dim); background: var(--cad-surface); border: 1px solid var(--cad-border); border-radius: var(--cad-radius-sm); padding: 7px 8px; font-size: 11px; }
+.cad-theme-select:focus { outline: 1px solid var(--cad-gold); }
+
+.cad-video-stage { position: relative; }
+.cad-current-video-title { margin: 0; color: var(--cad-text-dim); font-size: 12px; line-height: 1.45; }
+.cad-section-label { padding: 12px 12px 0; color: var(--cad-text-faint); font-size: 9px; letter-spacing: 0.16em; }
+.cad-queue-card { flex-shrink: 0; }
+.cad-queue-card .cad-sidebar-panel { max-height: 260px; }
+
+.cad-room.cinema .cad-room-body { grid-template-columns: minmax(0, 1fr); padding: 18px; }
+.cad-room.cinema .cad-room-video-col { max-width: 1400px; width: 100%; margin: auto; justify-content: center; overflow: hidden; }
+.cad-room.cinema .cad-room-title-row { display: none; }
+
+.cad-room-loading, .cad-room-error { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: var(--cad-bg); color: var(--cad-text-dim); }
+
+@media (max-width: 1180px) { .cad-room-body { grid-template-columns: 205px minmax(0, 1fr) 320px; } }
+@media (max-width: 950px) {
+  .cad-room { height: auto; min-height: 100vh; overflow: auto; }
+  .cad-room-body { grid-template-columns: 1fr; }
+  .cad-room-people { min-height: 230px; }
+  .cad-room-chat { min-height: 500px; }
+  .cad-room-video-col { overflow: visible; }
+}
+@media (max-width: 560px) {
+  .cad-room-header { padding: 9px 10px; }
+  .cad-room-header-right { gap: 6px; }
+  .cad-sync-indicator { display: none; }
+  .cad-room-count { display: none; }
+  .cad-room-invite-btn { display: none; }
+  .cad-room-body { padding: 8px; }
+  .cad-room-title-row h1 { font-size: 19px; }
+}

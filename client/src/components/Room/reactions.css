@@ -1,0 +1,26 @@
+.cad-reaction-bar {
+  display: flex;
+  justify-content: center;
+  gap: var(--cad-space-2);
+  padding: var(--cad-space-3);
+}
+.cad-reaction-btn {
+  font-size: 20px;
+  padding: 6px 10px;
+  border-radius: var(--cad-radius-md);
+  transition: transform var(--cad-transition), background var(--cad-transition);
+}
+.cad-reaction-btn:hover { background: var(--cad-surface); transform: scale(1.12); }
+.cad-reaction-btn:active { transform: scale(0.94); }
+
+.cad-reaction-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.cad-reaction-floater {
+  position: absolute;
+  bottom: 40px;
+  font-size: 26px;
+}

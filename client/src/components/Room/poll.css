@@ -1,0 +1,9 @@
+.cad-poll { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+.cad-poll-question { font-size: 11px; font-weight: 600; margin: 0 0 2px; line-height: 1.4; }
+.cad-poll-option { position: relative; display: flex; justify-content: space-between; align-items: center; padding: 7px 8px; border-radius: var(--cad-radius-sm); border: 1px solid var(--cad-border); font-size: 10px; overflow: hidden; text-align: left; }
+.cad-poll-option:hover { border-color: rgba(212,168,79,0.35); }
+.cad-poll-option.voted { border-color: var(--cad-gold); }
+.cad-poll-option-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--cad-gold-soft); transition: width 220ms ease; z-index: 0; }
+.cad-poll-option-label, .cad-poll-option-pct { position: relative; z-index: 1; }
+.cad-poll-option-pct { color: var(--cad-text-faint); }
+.cad-poll-votes { color: var(--cad-text-faint); font-size: 9px; }

@@ -1,0 +1,101 @@
+.cad-landing {
+  min-height: 100vh;
+  background: var(--cad-bg);
+  background-image: var(--cad-atmosphere, radial-gradient(circle at 50% 0%, rgba(212,168,79,0.05), transparent 60%));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 42px 24px 28px;
+}
+
+.cad-landing-content {
+  width: min(1120px, 100%);
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cad-landing-brand { text-align: center; }
+.cad-landing-brand p {
+  margin: 9px 0 0;
+  color: var(--cad-text-dim);
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.cad-landing-intro {
+  max-width: 600px;
+  margin: 22px 0 30px;
+  text-align: center;
+  color: var(--cad-text-dim);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.cad-feature-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.cad-feature-card {
+  min-height: 170px;
+  padding: 22px 18px;
+  background: rgba(21, 21, 19, 0.76);
+  border: 1px solid var(--cad-border);
+  border-radius: var(--cad-radius-lg);
+  box-shadow: var(--cad-shadow-soft);
+  transition: border-color var(--cad-transition), transform var(--cad-transition);
+}
+
+.cad-feature-card svg { color: var(--cad-gold); margin-bottom: 18px; }
+.cad-feature-card h2 {
+  margin: 0 0 9px;
+  font-family: var(--cad-font-display);
+  font-size: 20px;
+  font-weight: 600;
+}
+.cad-feature-card p {
+  margin: 0;
+  color: var(--cad-text-faint);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.cad-landing-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 30px;
+}
+.cad-landing-actions .cad-btn { min-width: 150px; }
+
+.cad-landing-footer {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 34px;
+  color: var(--cad-text-faint);
+  font-family: var(--cad-font-display);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+.cad-landing-footer strong { color: var(--cad-gold); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .cad-landing { padding-inline: 16px; }
+  .cad-feature-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 520px) {
+  .cad-landing { padding: 28px 14px 20px; }
+  .cad-landing-content { min-height: auto; }
+  .cad-feature-grid { grid-template-columns: 1fr; }
+  .cad-feature-card { min-height: auto; }
+  .cad-landing-actions { width: 100%; flex-direction: column; }
+  .cad-landing-actions .cad-btn { width: 100%; }
+  .cad-landing-footer { flex-wrap: wrap; justify-content: center; text-align: center; }
+}

@@ -1,0 +1,8 @@
+.cad-audio-room { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-top: 1px solid var(--cad-border); color: var(--cad-text-dim); font-size: 11px; }
+.cad-audio-title { display: flex; align-items: center; gap: 6px; color: var(--cad-text); font-weight: 700; }
+.cad-audio-mic, .cad-audio-speaker button { display: inline-flex; align-items: center; gap: 6px; width: fit-content; padding: 7px 10px; color: var(--cad-text-dim); background: var(--cad-surface-raised); border: 1px solid var(--cad-border); border-radius: var(--cad-radius-sm); font-size: 11px; }
+.cad-audio-mic.active { color: var(--cad-gold); border-color: var(--cad-gold); }
+.cad-audio-speaker { display: flex; align-items: center; gap: 6px; }
+.cad-audio-speaker button { margin-left: auto; padding: 4px 7px; font-size: 10px; }
+.cad-audio-elements { display: none; }
+.cad-audio-note { color: var(--cad-text-faint); font-size: 10px; }

@@ -1,0 +1,9 @@
+.cad-sync-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--cad-text-dim);
+}
+.cad-sync-dot { font-size: 9px; }
+.cad-sync-latency { color: var(--cad-text-faint); }

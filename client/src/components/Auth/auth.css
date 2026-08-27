@@ -1,0 +1,33 @@
+.cad-auth-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cad-space-6);
+  padding: var(--cad-space-5);
+  background: var(--cad-bg);
+}
+
+.cad-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cad-space-3);
+  width: 100%;
+  max-width: 340px;
+}
+
+.cad-auth-error {
+  color: var(--cad-red);
+  font-size: 13px;
+  margin: 0;
+}
+
+.cad-auth-switch {
+  font-size: 13px;
+  color: var(--cad-text-dim);
+}
+.cad-auth-switch button {
+  color: var(--cad-gold);
+  font-weight: 600;
+}

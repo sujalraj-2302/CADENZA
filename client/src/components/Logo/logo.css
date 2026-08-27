@@ -1,0 +1,59 @@
+.cad-intro {
+  position: fixed;
+  inset: 0;
+  background: var(--cad-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cad-space-5);
+  z-index: 1000;
+}
+
+.cad-intro-word {
+  display: flex;
+  font-family: var(--cad-font-display);
+  font-size: clamp(48px, 10vw, 96px);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--cad-gold);
+}
+
+.cad-intro-letter {
+  display: inline-block;
+  transform-origin: bottom center;
+}
+
+.cad-intro-e {
+  color: var(--cad-red);
+}
+
+.cad-intro-tagline {
+  font-family: var(--cad-font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cad-text-dim);
+  margin: 0;
+}
+
+/* Compact static wordmark used in navbars / headers throughout the app */
+.cad-logo {
+  display: inline-flex;
+  align-items: baseline;
+  font-family: var(--cad-font-display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--cad-gold);
+  user-select: none;
+}
+.cad-logo-e {
+  color: var(--cad-red);
+  display: inline-block;
+  transform: translateY(2px) rotate(-7deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cad-intro-letter { transition: none; }
+}

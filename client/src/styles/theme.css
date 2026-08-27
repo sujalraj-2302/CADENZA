@@ -1,0 +1,156 @@
+/* ==========================================================
+   CADENZA design tokens - the entire visual identity lives
+   here so every component pulls from the same small palette.
+   ========================================================== */
+:root {
+  --cad-bg: #0d0d0d;
+  --cad-surface: #151513;
+  --cad-surface-raised: #1c1b18;
+  --cad-border: rgba(244, 241, 232, 0.08);
+
+  --cad-gold: #d4a84f;
+  --cad-gold-soft: rgba(212, 168, 79, 0.14);
+  --cad-red: #c94b4b;
+  --cad-red-soft: rgba(201, 75, 75, 0.16);
+  --cad-text: #f4f1e8;
+  --cad-text-dim: rgba(244, 241, 232, 0.6);
+  --cad-text-faint: rgba(244, 241, 232, 0.38);
+
+  --cad-font-display: 'Cormorant Garamond', Georgia, serif;
+  --cad-font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --cad-radius-sm: 6px;
+  --cad-radius-md: 10px;
+  --cad-radius-lg: 16px;
+
+  --cad-space-1: 4px;
+  --cad-space-2: 8px;
+  --cad-space-3: 12px;
+  --cad-space-4: 16px;
+  --cad-space-5: 24px;
+  --cad-space-6: 32px;
+  --cad-space-7: 48px;
+  --cad-space-8: 64px;
+
+  --cad-shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --cad-header-bg: rgba(13, 13, 13, 0.92);
+  --cad-transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Room theme variants - swap accent/atmosphere, never the core identity */
+[data-theme='midnight-cinema'] {
+  --cad-atmosphere: radial-gradient(circle at 50% 0%, rgba(212, 168, 79, 0.05), transparent 60%);
+}
+[data-theme='aurora'] {
+  --cad-atmosphere: radial-gradient(circle at 20% 10%, rgba(93, 201, 154, 0.07), transparent 55%);
+}
+[data-theme='sunset'] {
+  --cad-atmosphere: radial-gradient(circle at 80% 0%, rgba(201, 116, 75, 0.08), transparent 55%);
+}
+[data-theme='ocean'] {
+  --cad-atmosphere: radial-gradient(circle at 30% 0%, rgba(75, 140, 201, 0.07), transparent 55%);
+}
+[data-theme='minimal'] {
+  --cad-atmosphere: none;
+}
+[data-theme='light'] {
+  --cad-bg: #f4f1e8;
+  --cad-surface: #fffdf8;
+  --cad-surface-raised: #ffffff;
+  --cad-border: rgba(31, 29, 25, 0.14);
+  --cad-text: #211f1a;
+  --cad-text-dim: rgba(33, 31, 26, 0.68);
+  --cad-text-faint: rgba(33, 31, 26, 0.48);
+  --cad-gold-soft: rgba(159, 112, 22, 0.16);
+  --cad-shadow-soft: 0 8px 30px rgba(48, 40, 25, 0.14);
+  --cad-header-bg: rgba(255, 253, 248, 0.94);
+  --cad-atmosphere: radial-gradient(circle at 50% 0%, rgba(212, 168, 79, 0.16), transparent 60%);
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--cad-bg);
+  color: var(--cad-text);
+  font-family: var(--cad-font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, textarea { font-family: inherit; }
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+a { color: inherit; }
+
+::selection { background: var(--cad-gold-soft); }
+
+/* Respect reduced-motion preference across the app */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.cad-focus:focus-visible {
+  outline: 2px solid var(--cad-gold);
+  outline-offset: 2px;
+}
+
+.cad-btn {
+  font-family: var(--cad-font-ui);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  padding: 12px 28px;
+  border-radius: var(--cad-radius-md);
+  transition: transform var(--cad-transition), background var(--cad-transition), opacity var(--cad-transition);
+}
+.cad-btn:active { transform: scale(0.98); }
+.cad-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.cad-btn-primary {
+  background: var(--cad-gold);
+  color: #16150f;
+}
+.cad-btn-primary:hover:not(:disabled) { background: #e0b75c; }
+
+.cad-btn-ghost {
+  background: transparent;
+  color: var(--cad-text);
+  border: 1px solid var(--cad-border);
+}
+.cad-btn-ghost:hover:not(:disabled) { border-color: var(--cad-gold); }
+
+.cad-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--cad-surface);
+  border: 1px solid var(--cad-border);
+  border-radius: var(--cad-radius-sm);
+  color: var(--cad-text);
+  font-size: 14px;
+  transition: border-color var(--cad-transition);
+}
+.cad-input:focus { outline: none; border-color: var(--cad-gold); }
+.cad-input::placeholder { color: var(--cad-text-faint); }
+
+.cad-card {
+  background: var(--cad-surface);
+  border: 1px solid var(--cad-border);
+  border-radius: var(--cad-radius-lg);
+}
+
+.cad-scroll { scrollbar-width: thin; scrollbar-color: var(--cad-border) transparent; }
+.cad-scroll::-webkit-scrollbar { width: 6px; }
+.cad-scroll::-webkit-scrollbar-thumb { background: var(--cad-border); border-radius: 3px; }
