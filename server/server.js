@@ -14,6 +14,7 @@ const registerSocketHandlers = require('./sockets');
 
 const PORT = process.env.PORT || 5000;
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
+const allowedOrigins = new Set([CLIENT_URL, 'http://localhost:5173', 'http://127.0.0.1:5173']);
 
 async function start() {
   await connectDB();
@@ -21,10 +22,10 @@ async function start() {
   const app = express();
   const server = http.createServer(app);
   const io = new Server(server, {
-    cors: { origin: CLIENT_URL, credentials: true },
+    cors: { origin: [...allowedOrigins], credentials: true },
   });
 
-  app.use(cors({ origin: CLIENT_URL, credentials: true }));
+  app.use(cors({ origin: [...allowedOrigins], credentials: true }));
   app.use(express.json());
   app.use(cookieParser());
 
