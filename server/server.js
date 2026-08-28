@@ -13,8 +13,15 @@ const errorHandler = require('./middleware/errorHandler');
 const registerSocketHandlers = require('./sockets');
 
 const PORT = process.env.PORT || 5000;
-const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
-const allowedOrigins = new Set([CLIENT_URL, 'http://localhost:5173', 'http://127.0.0.1:5173']);
+const configuredOrigins = (process.env.CLIENT_URL || '')
+  .split(',')
+  .map((origin) => origin.trim().replace(/\/$/, ''))
+  .filter(Boolean);
+const allowedOrigins = new Set([
+  ...configuredOrigins,
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+]);
 
 async function start() {
   await connectDB();

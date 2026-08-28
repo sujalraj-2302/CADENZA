@@ -124,6 +124,26 @@ Open `http://localhost:5173` — sign up, create a room, and open the room link 
 - **Backend**: any Node host (Render, Railway, Fly.io, EC2…). Set the same env vars; make sure `CLIENT_URL` points at your deployed frontend origin, and set `NODE_ENV=production` so the auth cookie is sent with `Secure`/`SameSite=None` (required for cross-origin cookies over HTTPS).
 - **Frontend**: `npm run build` in `client/`, deploy the `dist/` folder (Vercel, Netlify, Cloudflare Pages…). Set `VITE_API_URL`/`VITE_SOCKET_URL` to your backend's public URL.
 - **MongoDB**: MongoDB Atlas works well for a managed, production-ready database.
+
+#### Render checklist
+
+For separate Render services, set these backend environment variables:
+
+```
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret
+CLIENT_URL=https://your-frontend.onrender.com
+NODE_ENV=production
+```
+
+Set these frontend environment variables before building the static site, then redeploy it:
+
+```
+VITE_API_URL=https://your-backend.onrender.com/api
+VITE_SOCKET_URL=https://your-backend.onrender.com
+```
+
+Configure the frontend service as a Static Site with build command `npm install && npm run build`, publish directory `client/dist`, and a rewrite from `/*` to `/index.html`. `VITE_*` values are embedded during the build, so changing them requires a new deploy.
 - **Scaling**: when running multiple server instances, add the `@socket.io/redis-adapter` and move `RoomManager`'s in-memory `Map` to Redis — the module boundary is already there to make that a contained change.
 
 ## Key Technical Decisions

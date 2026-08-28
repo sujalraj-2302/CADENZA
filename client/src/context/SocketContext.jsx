@@ -3,6 +3,7 @@ import { io } from 'socket.io-client';
 import { useAuth } from './AuthContext';
 
 const SocketContext = createContext(null);
+const defaultSocketUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5000';
 
 export function SocketProvider({ children }) {
   const { user } = useAuth();
@@ -16,7 +17,7 @@ export function SocketProvider({ children }) {
       return;
     }
 
-    const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000', {
+    const socket = io(import.meta.env.VITE_SOCKET_URL || defaultSocketUrl, {
       withCredentials: true,
       autoConnect: true,
     });
