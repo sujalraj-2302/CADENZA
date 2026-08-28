@@ -1,4 +1,3 @@
-// Central error handler - never leak raw DB/server errors to the client.
 function errorHandler(err, req, res, next) {
   console.error('[error]', err);
 

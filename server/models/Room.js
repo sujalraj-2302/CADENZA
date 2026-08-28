@@ -32,7 +32,6 @@ const RoomSchema = new mongoose.Schema(
     privacy: { type: String, enum: ['private', 'link-only', 'public'], default: 'link-only' },
     theme: { type: String, default: 'midnight-cinema' },
 
-    // Authoritative playback state
     currentVideo: {
       videoId: { type: String, default: null },
       title: { type: String, default: '' },

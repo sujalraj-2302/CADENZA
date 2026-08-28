@@ -2,24 +2,10 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './logo.css';
 
-// Rendered in true reading order so the word is always horizontally
-// correct ("CADENZA"); the "E" (index 3) simply animates in later and
-// settles with a permanent lower/tilted offset via its own CSS class.
 const LETTERS = ['C', 'A', 'D', 'E', 'N', 'Z', 'A'];
 const E_INDEX = 3;
 const STORAGE_KEY = 'cadenza_visited';
 
-/**
- * The CADENZA signature intro.
- *
- * Every letter falls from above into a single horizontal line. The "E" is
- * the brand's signature element: it arrives last, settles slightly lower
- * and tilted, and is rendered in the accent red instead of gold.
- *
- * First-time visitors get the full ~3.5s sequence; returning visitors
- * (tracked via localStorage) get a fast, subtle version so branding never
- * gets in the way of actually using the app.
- */
 export default function LogoIntro({ onDone }) {
   const [showTagline, setShowTagline] = useState(false);
   const isReturning = typeof window !== 'undefined' && window.localStorage.getItem(STORAGE_KEY);
@@ -48,8 +34,6 @@ export default function LogoIntro({ onDone }) {
       <div className="cad-intro-word">
         {LETTERS.map((letter, i) => {
           const isE = i === E_INDEX;
-          // The E arrives after all the other letters have landed, and
-          // settles slightly lower + tilted - CADENZA's signature mark.
           const delay = isE
             ? baseDelay + (LETTERS.length - 1) * stagger + 0.12
             : baseDelay + i * stagger;

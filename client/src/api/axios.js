@@ -6,7 +6,7 @@ const defaultApiUrl = typeof window !== 'undefined'
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || defaultApiUrl,
-  withCredentials: true, // send/receive the httpOnly auth cookie
+  withCredentials: true,
 });
 
 export default api;

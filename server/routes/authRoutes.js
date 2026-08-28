@@ -5,7 +5,6 @@ const { requireAuth } = require('../middleware/auth');
 
 const router = express.Router();
 
-// Throttle auth endpoints to slow down credential stuffing / brute force.
 const authLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 30 });
 
 router.post('/signup', authLimiter, signup);

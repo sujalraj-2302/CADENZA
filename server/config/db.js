@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 
-/**
- * Connects to MongoDB using the connection string in process.env.MONGODB_URI.
- * Kept in its own module so server.js stays clean and the connection logic
- * can be extended later (pooling options, retries) without touching anything else.
- */
 async function connectDB() {
   const uri = process.env.MONGODB_URI;
 

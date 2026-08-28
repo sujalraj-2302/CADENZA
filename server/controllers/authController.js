@@ -47,7 +47,7 @@ async function signup(req, res, next) {
 
 async function login(req, res, next) {
   try {
-    const { identifier, password } = req.body; // identifier = email or username
+    const { identifier, password } = req.body;
     if (!identifier || !password) {
       return res.status(400).json({ error: 'Email/username and password are required.' });
     }

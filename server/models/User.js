@@ -26,7 +26,6 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Never expose the hash to the client.
 UserSchema.methods.toSafeObject = function toSafeObject() {
   return {
     id: this._id,

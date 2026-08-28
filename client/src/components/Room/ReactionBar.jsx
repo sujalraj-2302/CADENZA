@@ -4,10 +4,6 @@ import './reactions.css';
 
 const EMOJIS = ['😂', '🔥', '❤️', '😭', '😱', '👏', '💀', '🤯'];
 
-/**
- * Reaction bar (tap to send) + lightweight floating overlay. Reactions are
- * ephemeral - they animate up and vanish, nothing heavy is kept mounted.
- */
 export function ReactionBar({ onReact }) {
   return (
     <div className="cad-reaction-bar">
@@ -25,7 +21,7 @@ export function ReactionOverlay({ incoming }) {
 
   const push = useCallback((emoji) => {
     const id = `${Date.now()}-${Math.random()}`;
-    const left = 10 + Math.random() * 80; // spread horizontally
+    const left = 10 + Math.random() * 80;
     setFloaters((f) => [...f, { id, emoji, left }]);
     setTimeout(() => setFloaters((f) => f.filter((x) => x.id !== id)), 1800);
   }, []);

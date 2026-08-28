@@ -3,11 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './auth.css';
 
-/**
- * Shared form for both Login and Signup. Keeping one component avoids
- * duplicating validation/error-handling logic between two near-identical
- * screens.
- */
 export default function AuthForm({ mode }) {
   const isSignup = mode === 'signup';
   const { login, signup } = useAuth();

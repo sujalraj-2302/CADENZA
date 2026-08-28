@@ -1,11 +1,5 @@
 import Modal from './Modal';
 
-/**
- * A calm, cinematic recap - not an analytics dashboard. Stats are derived
- * from what happened during this client's session (message/reaction
- * counts), which is enough for a meaningful, lightweight summary without
- * needing a dedicated analytics pipeline.
- */
 export default function SessionSummary({ stats, onClose }) {
   return (
     <Modal title="Session Complete" onClose={onClose}>

@@ -17,10 +17,6 @@ const registerSocketHandlers = require('./sockets');
 
 const PORT = process.env.PORT || 5000;
 
-// --------------------------------------------------
-// CORS CONFIGURATION
-// --------------------------------------------------
-
 const configuredOrigins = (process.env.CLIENT_URL || '')
   .split(',')
   .map((origin) => origin.trim().replace(/\/$/, ''))
@@ -32,23 +28,12 @@ const allowedOrigins = new Set([
   'http://127.0.0.1:5173',
 ]);
 
-// --------------------------------------------------
-// START SERVER
-// --------------------------------------------------
-
 async function start() {
   try {
-    // Connect to MongoDB first
     await connectDB();
 
     const app = express();
-
-    // Create HTTP server
     const server = http.createServer(app);
-
-    // --------------------------------------------------
-    // SOCKET.IO
-    // --------------------------------------------------
 
     const io = new Server(server, {
       cors: {
@@ -56,10 +41,6 @@ async function start() {
         credentials: true,
       },
     });
-
-    // --------------------------------------------------
-    // MIDDLEWARE
-    // --------------------------------------------------
 
     app.use(
       cors({
@@ -79,10 +60,6 @@ async function start() {
       });
     });
 
-    // --------------------------------------------------
-    // HEALTH CHECK
-    // --------------------------------------------------
-
     app.get('/api/health', (req, res) => {
       res.status(200).json({
         ok: true,
@@ -90,29 +67,13 @@ async function start() {
       });
     });
 
-    // --------------------------------------------------
-    // API ROUTES
-    // --------------------------------------------------
-
     app.use('/api/auth', authRoutes);
     app.use('/api/rooms', roomRoutes);
     app.use('/api/groups', groupRoutes);
 
-    // --------------------------------------------------
-    // SOCKET HANDLERS
-    // --------------------------------------------------
-
     registerSocketHandlers(io);
 
-    // --------------------------------------------------
-    // ERROR HANDLER
-    // --------------------------------------------------
-
     app.use(errorHandler);
-
-    // --------------------------------------------------
-    // START LISTENING
-    // --------------------------------------------------
 
     server.listen(PORT, () => {
       console.log('[cadenza] server listening on port ' + PORT);

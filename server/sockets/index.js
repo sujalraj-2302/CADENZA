@@ -4,11 +4,10 @@ const User = require('../models/User');
 const Room = require('../models/Room');
 const roomManager = require('./roomManager');
 
-const DRIFT_THRESHOLD_SECONDS = 0.65; // correct meaningful drift without visible jitter
+const DRIFT_THRESHOLD_SECONDS = 0.65;
 const SNAPSHOT_INTERVAL_MS = 8000;
 
 function registerSocketHandlers(io) {
-  // Authenticate the socket using the same httpOnly cookie the REST API uses.
   io.use(async (socket, next) => {
     try {
       const raw = socket.handshake.headers.cookie || '';
@@ -56,8 +55,6 @@ function registerSocketHandlers(io) {
           role,
         });
 
-        // Bring the live in-memory clock in sync with the DB snapshot the
-        // first time this room becomes live in this process.
         const live = roomManager.getOrCreate(code);
         if (roomManager.count(code) === 1) {
           roomManager.setPlayback(code, { state: room.playbackState, time: room.currentTime });
@@ -88,7 +85,6 @@ function registerSocketHandlers(io) {
 
     socket.on('leave_room', () => leaveCurrentRoom());
 
-    // --- Playback control (host/moderator only, server-enforced) ---
     socket.on('play', ({ time }) => {
       if (!currentRoomCode || !roomManager.canControlPlayback(currentRoomCode, socket.id)) return;
       roomManager.setPlayback(currentRoomCode, { state: 'playing', time });
@@ -110,8 +106,6 @@ function registerSocketHandlers(io) {
       socket.to(currentRoomCode).emit('seek', { time });
     });
 
-    // Clients report their local time; server only corrects on real drift,
-    // never on every tick, to keep playback smooth.
     socket.on('report_time', ({ time, state }) => {
       if (!currentRoomCode || typeof time !== 'number') return;
       const live = roomManager.liveRooms.get(currentRoomCode);
@@ -148,7 +142,6 @@ function registerSocketHandlers(io) {
       await startVideo(currentRoomCode, { videoId, title, thumbnail });
     });
 
-    // --- Queue ---
     socket.on('add_to_queue', async ({ videoId, title, thumbnail, duration }) => {
       if (!currentRoomCode || !/^[a-zA-Z0-9_-]{11}$/.test(videoId || '')) return;
       const room = await Room.findOne({ roomCode: currentRoomCode });
@@ -156,9 +149,6 @@ function registerSocketHandlers(io) {
 
       const video = { videoId, title: title || '', thumbnail: thumbnail || '', duration: Number.isFinite(duration) ? duration : null };
 
-      // If a host/moderator adds the first video to an empty room, start it
-      // immediately. This removes the old dead-end where videos could be
-      // added to the queue but no client ever emitted change_video.
       if (!room.currentVideo?.videoId && roomManager.canControlPlayback(currentRoomCode, socket.id)) {
         await startVideo(currentRoomCode, video);
         return;
@@ -230,7 +220,6 @@ function registerSocketHandlers(io) {
       await startVideo(currentRoomCode, next);
     });
 
-    // --- Reactions ---
     socket.on('react', ({ emoji, videoTime }) => {
       if (!currentRoomCode) return;
       io.to(currentRoomCode).emit('reaction', {
@@ -242,10 +231,9 @@ function registerSocketHandlers(io) {
       });
     });
 
-    // --- Chat ---
     socket.on('send_message', ({ text, replyTo, videoId, videoTime }) => {
       if (!currentRoomCode || !text || !text.trim()) return;
-      const clean = text.trim().slice(0, 500); // basic sanitation: length cap; React escapes output
+      const clean = text.trim().slice(0, 500);
       io.to(currentRoomCode).emit('message', {
         id: `${socket.id}-${Date.now()}`,
         text: clean,
@@ -258,7 +246,6 @@ function registerSocketHandlers(io) {
       });
     });
 
-    // --- Room audio signaling ---
     socket.on('audio_offer', ({ to, offer }) => {
       if (!currentRoomCode || !to || !offer) return;
       io.to(to).emit('audio_offer', { from: socket.id, offer });
@@ -293,7 +280,6 @@ function registerSocketHandlers(io) {
       socket.to(currentRoomCode).emit('typing', { userId: socket.userId, name: socket.userName, isTyping });
     });
 
-    // --- Roles (host only) ---
     socket.on('assign_role', async ({ userId, role }) => {
       if (!currentRoomCode || !roomManager.isHost(currentRoomCode, socket.id)) return;
       if (!['moderator', 'participant'].includes(role)) return;
@@ -333,14 +319,12 @@ function registerSocketHandlers(io) {
       io.to(currentRoomCode).emit('user_left', { userId, count: roomManager.count(currentRoomCode) });
     });
 
-    // --- Theme ---
     socket.on('change_theme', async ({ theme }) => {
       if (!currentRoomCode || !roomManager.canControlPlayback(currentRoomCode, socket.id)) return;
       await Room.findOneAndUpdate({ roomCode: currentRoomCode }, { theme });
       io.to(currentRoomCode).emit('theme_changed', { theme });
     });
 
-    // --- Polls (lightweight, in-memory per live room) ---
     socket.on('create_poll', ({ question, options }) => {
       if (!currentRoomCode || !roomManager.canControlPlayback(currentRoomCode, socket.id)) return;
       const live = roomManager.getOrCreate(currentRoomCode);
@@ -386,8 +370,6 @@ function registerSocketHandlers(io) {
     }
   });
 
-  // Periodically persist live playback snapshots so state survives restarts
-  // and REST clients (e.g. a fresh page load) see an up-to-date position.
   setInterval(() => {
     for (const roomCode of roomManager.liveRooms.keys()) {
       roomManager.persistPlaybackSnapshot(roomCode);

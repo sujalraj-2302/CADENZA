@@ -5,7 +5,7 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // true until we've checked the existing cookie
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     authApi

@@ -174,7 +174,6 @@ export default function RoomPage() {
     };
   }, [socket, connected, roomCode, navigate]);
 
-  // A one-second heartbeat keeps meaningful drift low without constantly seeking.
   useEffect(() => {
     if (!socket || !connected) return;
     const interval = setInterval(() => {
@@ -204,7 +203,7 @@ export default function RoomPage() {
   const handleLeave = async () => {
     if (leaving) return;
     setLeaving(true);
-    try { await leaveRoom(roomCode); } catch { /* socket cleanup still runs */ }
+    try { await leaveRoom(roomCode); } catch { }
     socket?.emit('leave_room');
     navigate('/home');
   };

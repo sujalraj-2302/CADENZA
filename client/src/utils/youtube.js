@@ -1,4 +1,3 @@
-// Accepts full YouTube URLs (watch, youtu.be, shorts, embed) or a bare 11-char ID.
 export function extractYouTubeId(input) {
   if (!input) return null;
   const trimmed = input.trim();
