@@ -17,6 +17,7 @@ export default function VideoPlayer({ videoId, canControl, playbackState = 'paus
   const wrapRef = useRef(null);
 
   const player = useYouTubePlayer(containerId, {
+    videoId,
     onReady: () => setStatus('ready'),
     onError: (code) => {
       const messages = {

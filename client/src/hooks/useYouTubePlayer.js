@@ -26,7 +26,7 @@ function loadYouTubeApi() {
   return apiPromise;
 }
 
-export default function useYouTubePlayer(containerId, { onReady, onStateChange, onError } = {}) {
+export default function useYouTubePlayer(containerId, { videoId, onReady, onStateChange, onError } = {}) {
   const playerRef = useRef(null);
   const callbacks = useRef({ onReady, onStateChange, onError });
   const [ready, setReady] = useState(false);
@@ -45,6 +45,7 @@ export default function useYouTubePlayer(containerId, { onReady, onStateChange, 
         playerRef.current = new YT.Player(container, {
           height: '100%',
           width: '100%',
+          ...(videoId ? { videoId } : {}),
           playerVars: {
             autoplay: 0,
             enablejsapi: 1,
@@ -71,7 +72,7 @@ export default function useYouTubePlayer(containerId, { onReady, onStateChange, 
       playerRef.current?.destroy?.();
       playerRef.current = null;
     };
-  }, [containerId]);
+  }, [containerId, videoId]);
 
   const loadVideo = useCallback((videoId, startSeconds = 0) => playerRef.current?.loadVideoById({ videoId, startSeconds }), []);
   const play = useCallback(() => playerRef.current?.playVideo(), []);
