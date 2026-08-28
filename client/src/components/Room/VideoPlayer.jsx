@@ -1,6 +1,7 @@
 import { AlertTriangle, LoaderCircle, Maximize2, Minimize2, RotateCcw, SkipBack, SkipForward } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import useYouTubePlayer from '../../hooks/useYouTubePlayer';
+import { formatTime } from '../../utils/youtube';
 import './video-player.css';
 
 const YT_PLAYING = 1;
@@ -13,6 +14,8 @@ export default function VideoPlayer({ videoId, canControl, playbackState = 'paus
   const lastEmittedState = useRef(null);
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState('');
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const wrapRef = useRef(null);
 
@@ -91,6 +94,17 @@ export default function VideoPlayer({ videoId, canControl, playbackState = 'paus
   }, [player.ready, videoId, startTime, playbackState, player]);
 
   useEffect(() => {
+    if (!player.ready || !videoId) return;
+    const updateTime = () => {
+      setCurrentTime(player.getCurrentTime());
+      setDuration(player.getDuration());
+    };
+    updateTime();
+    const interval = window.setInterval(updateTime, 500);
+    return () => window.clearInterval(interval);
+  }, [player.ready, videoId, player]);
+
+  useEffect(() => {
     const updateFullscreenState = () => setIsFullscreen(document.fullscreenElement === wrapRef.current);
     document.addEventListener('fullscreenchange', updateFullscreenState);
     return () => document.removeEventListener('fullscreenchange', updateFullscreenState);
@@ -107,6 +121,14 @@ export default function VideoPlayer({ videoId, canControl, playbackState = 'paus
   function skip(seconds) {
     const time = Math.max(0, player.getCurrentTime() + seconds);
     player.seekTo(time);
+    setCurrentTime(time);
+    onSeek?.(time);
+  }
+
+  function seekToPosition(event) {
+    const time = Number(event.target.value);
+    player.seekTo(time);
+    setCurrentTime(time);
     onSeek?.(time);
   }
 
@@ -139,13 +161,27 @@ export default function VideoPlayer({ videoId, canControl, playbackState = 'paus
       )}
 
       {videoId && canControl && (
-        <div className="cad-video-seek-controls">
+        <div className="cad-video-controls">
+          <div className="cad-video-timeline">
+            <input
+              type="range"
+              min="0"
+              max={duration || 1}
+              step="0.1"
+              value={Math.min(currentTime, duration || 1)}
+              onChange={seekToPosition}
+              aria-label="Seek through video"
+            />
+            <span>{formatTime(currentTime)} / {formatTime(duration)}</span>
+          </div>
+          <div className="cad-video-seek-controls">
           <button type="button" onClick={() => skip(-10)} aria-label="Back 10 seconds" title="Back 10 seconds">
             <SkipBack size={16} />
           </button>
           <button type="button" onClick={() => skip(10)} aria-label="Forward 10 seconds" title="Forward 10 seconds">
             <SkipForward size={16} />
           </button>
+          </div>
         </div>
       )}
 
