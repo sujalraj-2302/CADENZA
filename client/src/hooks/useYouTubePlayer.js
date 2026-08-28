@@ -42,7 +42,14 @@ export default function useYouTubePlayer(containerId, { onReady, onStateChange, 
         playerRef.current = new YT.Player(containerId, {
           height: '100%',
           width: '100%',
-          playerVars: { autoplay: 1, rel: 0, modestbranding: 1, playsinline: 1, enablejsapi: 1 },
+          playerVars: {
+            autoplay: 0,
+            enablejsapi: 1,
+            modestbranding: 1,
+            origin: window.location.origin,
+            playsinline: 1,
+            rel: 0,
+          },
           events: {
             onReady: () => { setReady(true); callbacks.current.onReady?.(); },
             onStateChange: (e) => callbacks.current.onStateChange?.(e.data),
