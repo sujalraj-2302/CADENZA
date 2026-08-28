@@ -119,6 +119,12 @@ function registerSocketHandlers(io) {
       const authoritative = roomManager.getEstimatedTime(currentRoomCode);
       const drifted = Math.abs(authoritative - time) > DRIFT_THRESHOLD_SECONDS;
       const stateMismatch = state && state !== live.playbackState;
+      if (roomManager.canControlPlayback(currentRoomCode, socket.id) && drifted) {
+        roomManager.setPlayback(currentRoomCode, { time, state: state || live.playbackState });
+        roomManager.persistPlaybackSnapshot(currentRoomCode);
+        socket.to(currentRoomCode).emit('seek', { time });
+        return;
+      }
       if (drifted) socket.emit('seek', { time: authoritative });
       if (stateMismatch) socket.emit(live.playbackState, { time: authoritative });
     });
