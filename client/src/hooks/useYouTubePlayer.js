@@ -39,7 +39,10 @@ export default function useYouTubePlayer(containerId, { onReady, onStateChange, 
     loadYouTubeApi()
       .then((YT) => {
         if (cancelled) return;
-        playerRef.current = new YT.Player(containerId, {
+        const container = document.getElementById(containerId);
+        if (!container || cancelled) return;
+
+        playerRef.current = new YT.Player(container, {
           height: '100%',
           width: '100%',
           playerVars: {

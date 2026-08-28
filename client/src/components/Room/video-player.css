@@ -8,6 +8,7 @@
 .cad-video-seek-controls button { display: grid; place-items: center; width: 36px; height: 36px; color: #fff; background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.25); border-radius: var(--cad-radius-sm); }
 .cad-video-seek-controls button:hover { background: rgba(0,0,0,0.9); color: var(--cad-gold); }
 .cad-video-empty, .cad-video-status { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--cad-text-faint); gap: 7px; font-size: 13px; text-align: center; background: radial-gradient(circle at 50% 40%, rgba(212,168,79,0.06), transparent 55%), var(--cad-bg); z-index: 2; }
+.cad-video-empty { pointer-events: none; }
 .cad-video-empty p { margin: 0; }
 .cad-video-empty-hint { font-size: 11px; }
 .cad-video-status { background: color-mix(in srgb, var(--cad-bg) 90%, transparent); backdrop-filter: blur(4px); }

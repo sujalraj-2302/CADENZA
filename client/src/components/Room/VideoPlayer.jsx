@@ -123,7 +123,7 @@ export default function VideoPlayer({ videoId, canControl, playbackState = 'paus
           {canControl && <p className="cad-video-empty-hint">Add a YouTube video to the queue to get started.</p>}
         </div>
       )}
-      <div id={containerId} className="cad-video-frame" style={{ display: videoId ? 'block' : 'none' }} />
+      <div id={containerId} className="cad-video-frame" />
 
       {videoId && (
         <button
