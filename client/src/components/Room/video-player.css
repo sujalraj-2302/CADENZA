@@ -2,15 +2,6 @@
 .cad-video-wrap:fullscreen { width: 100vw; height: 100vh; aspect-ratio: auto; border: 0; border-radius: 0; }
 .cad-video-frame { width: 100%; height: 100%; }
 .cad-video-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
-.cad-video-fullscreen { position: absolute; right: 12px; bottom: 12px; z-index: 3; display: grid; place-items: center; width: 36px; height: 36px; color: #fff; background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.25); border-radius: var(--cad-radius-sm); }
-.cad-video-fullscreen:hover { background: rgba(0,0,0,0.9); color: var(--cad-gold); }
-.cad-video-controls { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 3; display: flex; align-items: end; gap: 8px; }
-.cad-video-timeline { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; padding: 7px 10px; color: #fff; background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.25); border-radius: var(--cad-radius-sm); }
-.cad-video-timeline input { flex: 1; min-width: 60px; accent-color: var(--cad-gold); cursor: pointer; }
-.cad-video-timeline span { min-width: 76px; font-size: 10px; text-align: right; font-variant-numeric: tabular-nums; }
-.cad-video-seek-controls { display: flex; gap: 6px; }
-.cad-video-seek-controls button { display: grid; place-items: center; width: 36px; height: 36px; color: #fff; background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.25); border-radius: var(--cad-radius-sm); }
-.cad-video-seek-controls button:hover { background: rgba(0,0,0,0.9); color: var(--cad-gold); }
 .cad-video-empty, .cad-video-status { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--cad-text-faint); gap: 7px; font-size: 13px; text-align: center; background: radial-gradient(circle at 50% 40%, rgba(212,168,79,0.06), transparent 55%), var(--cad-bg); z-index: 2; }
 .cad-video-empty { pointer-events: none; }
 .cad-video-empty p { margin: 0; }

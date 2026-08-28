@@ -49,7 +49,10 @@ export default function useYouTubePlayer(containerId, { videoId, onReady, onStat
           host: 'https://www.youtube-nocookie.com',
           playerVars: {
             autoplay: 0,
+            controls: 1,
+            disablekb: 0,
             enablejsapi: 1,
+            fs: 1,
             modestbranding: 1,
             origin: window.location.origin,
             playsinline: 1,
@@ -80,7 +83,6 @@ export default function useYouTubePlayer(containerId, { videoId, onReady, onStat
   const pause = useCallback(() => playerRef.current?.pauseVideo(), []);
   const seekTo = useCallback((seconds) => playerRef.current?.seekTo(Math.max(0, seconds), true), []);
   const getCurrentTime = useCallback(() => playerRef.current?.getCurrentTime?.() ?? 0, []);
-  const getDuration = useCallback(() => playerRef.current?.getDuration?.() ?? 0, []);
 
-  return useMemo(() => ({ ready, apiError, loadVideo, play, pause, seekTo, getCurrentTime, getDuration }), [ready, apiError, loadVideo, play, pause, seekTo, getCurrentTime, getDuration]);
+  return useMemo(() => ({ ready, apiError, loadVideo, play, pause, seekTo, getCurrentTime }), [ready, apiError, loadVideo, play, pause, seekTo, getCurrentTime]);
 }
