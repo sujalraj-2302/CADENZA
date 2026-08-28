@@ -26,7 +26,7 @@ function loadYouTubeApi() {
   return apiPromise;
 }
 
-export default function useYouTubePlayer(containerId, { videoId, onReady, onStateChange, onError } = {}) {
+export default function useYouTubePlayer(containerId, { videoId, canControl, onReady, onStateChange, onError } = {}) {
   const playerRef = useRef(null);
   const callbacks = useRef({ onReady, onStateChange, onError });
   const [ready, setReady] = useState(false);
@@ -49,8 +49,8 @@ export default function useYouTubePlayer(containerId, { videoId, onReady, onStat
           host: 'https://www.youtube-nocookie.com',
           playerVars: {
             autoplay: 0,
-            controls: 1,
-            disablekb: 0,
+            controls: canControl ? 1 : 0,
+            disablekb: canControl ? 0 : 1,
             enablejsapi: 1,
             fs: 1,
             modestbranding: 1,
@@ -76,7 +76,7 @@ export default function useYouTubePlayer(containerId, { videoId, onReady, onStat
       playerRef.current?.destroy?.();
       playerRef.current = null;
     };
-  }, [containerId, videoId]);
+  }, [containerId, videoId, canControl]);
 
   const loadVideo = useCallback((videoId, startSeconds = 0) => playerRef.current?.loadVideoById({ videoId, startSeconds }), []);
   const play = useCallback(() => playerRef.current?.playVideo(), []);
